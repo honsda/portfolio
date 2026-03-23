@@ -1,0 +1,25 @@
+---
+---
+<nav class="fixed top-0 left-0 right-0 z-[100] border-b border-white/5 bg-ink-black/80 backdrop-blur-md">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-10 h-20 flex items-center justify-between">
+    <div class="flex flex-col">
+      <span class="font-display text-xl leading-none text-paper tracking-wider">ꦲꦺꦴꦤ꧀ꦱꦢ</span>
+      <span class="font-mono text-[8.5px] text-paper-ghost uppercase tracking-[0.22em] mt-1">honsda</span>
+    </div>
+
+    <div class="hidden md:flex items-center gap-8">
+      {['About', 'Projects', 'Stack', 'Contact'].map((item) => (
+        <a 
+          href={`#${item.toLowerCase()}`} 
+          class="font-mono text-[10px] uppercase tracking-[0.2em] text-paper-ghost hover:text-paper transition-colors duration-300"
+        >
+          {item}
+        </a>
+      ))}
+    </div>
+
+    <button class="md:hidden font-mono text-[10px] text-paper-ghost uppercase tracking-[0.2em]">
+      Menu
+    </button>
+  </div>
+</nav>

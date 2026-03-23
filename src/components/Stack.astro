@@ -1,0 +1,83 @@
+---
+const stack = [
+  {
+    category: "Frameworks",
+    items: [
+      { name: "Svelte", primary: true },
+      { name: "Astro", primary: true },
+      { name: "Vue.js", primary: true },
+      { name: "React", primary: true }
+    ]
+  },
+  {
+    category: "Language",
+    items: [
+      { name: "TypeScript", primary: true },
+      { name: "JavaScript", primary: false },
+      { name: "Java", primary: false }
+    ]
+  },
+  {
+    category: "Mapping",
+    items: [
+      { name: "MapLibre", primary: true },
+      { name: "QGIS", primary: true }
+    ]
+  },
+  {
+    category: "Design",
+    items: [
+      { name: "Figma", primary: true }
+    ]
+  },
+  {
+    category: "Tooling",
+    items: [
+      { name: "Git", primary: false },
+      { name: "GitHub", primary: false }
+    ]
+  },
+  {
+    category: "AI Workflow",
+    dimmed: true,
+    items: [
+      { name: "Claude", primary: false },
+      { name: "Gemini CLI", primary: false },
+      { name: "Kimi", primary: false }
+    ]
+  }
+];
+---
+<section id="stack" class="bg-ink-deep border-t border-b border-white/5 py-32">
+  <div class="max-w-[1440px] mx-auto px-10">
+    <span class="section-label fade-up">// Stack</span>
+    
+    <h2 class="text-[clamp(2.5rem,6vw,3.5rem)] font-black leading-none mb-20 fade-up">
+      Tools I<br />
+      work with.
+    </h2>
+
+    <div class="border-t border-white/5">
+      {stack.map((group) => (
+        <div class={`flex flex-col md:flex-row border-b border-white/5 py-8 group transition-colors duration-300 fade-up ${group.dimmed ? 'opacity-50' : ''}`}>
+          <div class={`w-[140px] shrink-0 font-mono text-[8.5px] uppercase tracking-[0.2em] mb-4 md:mb-0 ${group.dimmed ? 'text-indigo-faint' : 'text-indigo-muted'}`}>
+            {group.category}
+          </div>
+          <div class="flex flex-wrap gap-x-8 gap-y-4">
+            {group.items.map((item) => (
+              <span class={`font-mono text-[9.5px] uppercase tracking-[0.1em] transition-colors duration-300 ${
+                group.dimmed 
+                  ? 'text-[#2e2e3a]' 
+                  : item.primary 
+                    ? 'text-paper-mid group-hover:text-paper' 
+                    : 'text-paper-dim group-hover:text-paper-mid'
+              }`}>
+                {item.name}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

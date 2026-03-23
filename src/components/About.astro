@@ -1,0 +1,46 @@
+---
+---
+<section id="about" class="max-w-[1440px] mx-auto px-10 py-32">
+  <span class="section-label fade-up">// About</span>
+  
+  <h2 class="text-[clamp(2.5rem,6vw,3.5rem)] font-black leading-none mb-20 fade-up">
+    Developer.<br />
+    Designer.<br />
+    Builder.
+  </h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
+    <!-- Left — Bio -->
+    <div class="space-y-8 font-mono text-[10px] text-paper-dim leading-[1.9] fade-up">
+      <p>
+        I'm a frontend developer and UI/UX designer working across frameworks, 
+        mapping tools, and design systems. I've been shipping real things 
+        on the web for years — before AI tools existed, and sharper 
+        because of them now.
+      </p>
+      <p>
+        From political simulators to wiki bots to live event platforms — 
+        I own projects end to end, from concept and Figma to deployed code.
+      </p>
+      <p>
+        Design sensibility and technical depth in the same person. I build with 
+        modern tools and AI-assisted workflows to move fast without losing what's under the hood.
+      </p>
+    </div>
+
+    <!-- Right — Stats Grid -->
+    <div class="grid grid-cols-2 gap-px bg-white/5 border border-white/5 fade-up">
+      {[
+        { val: '5+', label: 'Projects shipped' },
+        { val: '3+', label: 'Years building' },
+        { val: '6+', label: 'Frameworks used' },
+        { val: '∞', label: 'Tabs open' },
+      ].map((stat) => (
+        <div class="bg-ink-surface p-8 flex flex-col justify-center items-center text-center">
+          <span class="font-display text-3xl font-bold text-paper mb-2">{stat.val}</span>
+          <span class="font-mono text-[8.5px] uppercase tracking-[0.2em] text-paper-ghost">{stat.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

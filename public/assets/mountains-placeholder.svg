@@ -1,0 +1,11 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1920" height="1080" fill="#080808"/>
+  <!-- Far background mountains -->
+  <path d="M0 800L300 650L600 780L1000 550L1400 720L1920 600V1080H0V800Z" fill="#1A1E2E" opacity="0.15"/>
+  <!-- Middle mountains -->
+  <path d="M0 900L400 750L800 850L1200 680L1600 820L1920 750V1080H0V900Z" fill="#3A3F5C" opacity="0.25"/>
+  <!-- Nearer mountains (Right-heavy) -->
+  <path d="M400 1080L800 880L1200 950L1500 700L1920 900V1080H400Z" fill="#7880A8" opacity="0.35"/>
+  <!-- Frontmost mountains -->
+  <path d="M1000 1080L1400 850L1800 980L1920 920V1080H1000Z" fill="#E8E4DC" opacity="0.45"/>
+</svg>

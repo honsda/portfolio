@@ -1,0 +1,71 @@
+---
+import ProjectCard from './ProjectCard.svelte';
+
+const projects = [
+  {
+    num: "01",
+    featured: true,
+    title: "Latin → Javanese Script Translator",
+    desc: "A Svelte web app that converts Latin-script text into Aksara Jawa. Built from scratch — handles the full character mapping logic in TypeScript.",
+    tags: ["Svelte", "TypeScript", "Language Tools"],
+    link: "https://github.com/honsda"
+  },
+  {
+    num: "02",
+    title: "SansCool — Script Converter",
+    desc: "My own project, hosted on a collaborator's GitHub. I designed and built the entire frontend and core conversion logic.",
+    tags: ["Open Source", "JavaScript", "UI/UX"],
+    link: "https://github.com/tonybolivar/shapes-and-states/sanscool"
+  },
+  {
+    num: "03",
+    title: "OSIS School Website",
+    desc: "Production website for the student organization of FIWA School. Designed in Figma, built and deployed from scratch.",
+    tags: ["Astro", "Figma", "UI Design"],
+    link: "https://osis.fiwaschool.com"
+  },
+  {
+    num: "04",
+    title: "Event Committee Websites",
+    desc: "Frontend & UI/UX lead for multiple live school events. Full ownership — Figma mockup to deployed site, real deadlines, real audiences.",
+    tags: ["Figma", "JavaScript", "UI/UX"],
+    link: "https://github.com/honsda"
+  },
+  {
+    num: "05",
+    title: "OAWikiBot",
+    desc: "A JavaScript bot bridging three platforms — Miraheze wiki API, Discord, and a Minecraft bot — into one integrated system for the OpenAnarchy community.",
+    tags: ["JavaScript", "Bot Dev", "API Integration"],
+    link: "https://github.com/honsda/oawikibot-crab"
+  },
+  {
+    num: "06",
+    title: "Minecraft Modding",
+    desc: "Built utility mods for Minecraft including a map data exporter for the Age of History 2 community. Early work that required reading game internals and understanding low-level data structures.",
+    tags: ["Java", "Modding", "Data Tools"],
+    link: "https://github.com/honsda"
+  }
+];
+---
+<section id="projects" class="max-w-[1440px] mx-auto px-10 py-32">
+  <span class="section-label fade-up">// Projects</span>
+  
+  <h2 class="text-[clamp(2.5rem,6vw,3.5rem)] font-black leading-none mb-20 fade-up">
+    Selected<br />
+    work.
+  </h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 border border-white/5">
+    {projects.map((project) => (
+      <ProjectCard 
+        client:load
+        num={project.num}
+        title={project.title}
+        desc={project.desc}
+        tags={project.tags}
+        link={project.link}
+        featured={project.featured}
+      />
+    ))}
+  </div>
+</section>
