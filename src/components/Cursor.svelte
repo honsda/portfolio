@@ -77,24 +77,17 @@
       if (points.length > 2) {
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
-        ctx.globalCompositeOperation = 'difference';
 
         // Draw multiple segments for tapering effect
-        for (let i = 1; i < points.length - 1; i++) {
+        for (let i = 1; i < points.length; i++) {
           const ratio = i / points.length;
-          const size = ratio * 6; // Head is larger
+          const size = ratio * 6; 
           
           ctx.beginPath();
-          // Connect midpoints for a smooth continuous curve
-          const xc1 = (points[i].x + points[i-1].x) / 2;
-          const yc1 = (points[i].y + points[i-1].y) / 2;
-          const xc2 = (points[i+1].x + points[i].x) / 2;
-          const yc2 = (points[i+1].y + points[i].y) / 2;
-
-          ctx.moveTo(xc1, yc1);
-          ctx.quadraticCurveTo(points[i].x, points[i].y, xc2, yc2);
+          ctx.moveTo(points[i-1].x, points[i-1].y);
+          ctx.lineTo(points[i].x, points[i].y);
           
-          ctx.strokeStyle = '#e8e4dc'; // Solid color, no fade
+          ctx.strokeStyle = '#e8e4dc';
           ctx.lineWidth = size;
           ctx.stroke();
         }
@@ -145,6 +138,7 @@
     height: 100vh;
     pointer-events: none;
     z-index: 9998;
+    mix-blend-mode: difference;
   }
 
   .cursor-dot {
