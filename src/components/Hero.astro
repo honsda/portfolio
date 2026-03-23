@@ -1,35 +1,70 @@
 ---
+import Leaves from './Leaves.svelte';
 ---
-<section class="relative h-screen min-h-[700px] w-full bg-ink-black overflow-hidden flex items-end">
-  <!-- Hero Art Background Layer -->
-  <div class="hero-art">
+<section class="relative h-screen min-h-[700px] w-full bg-ink-black overflow-hidden">
+  <!-- Falling Leaves (Svelte Component) -->
+  <Leaves client:load />
+
+  <!-- Hero Art: Mountain Vector Layer -->
+  <div class="absolute bottom-0 right-0 w-full h-[70%] lg:w-3/4 lg:h-3/4 z-0 pointer-events-none overflow-hidden">
     <img 
-      src="/assets/mountains-placeholder.svg" 
+      src="/assets/mountainvectors.svg" 
       alt="" 
-      class="mountain-img" 
+      class="w-full h-full object-cover lg:object-contain object-bottom lg:object-right-bottom opacity-20 mix-blend-lighten" 
       aria-hidden="true" 
+      style="mask-image: radial-gradient(circle at 100% 100%, black 20%, transparent 95%); -webkit-mask-image: radial-gradient(circle at 100% 100%, black 20%, transparent 95%);"
     />
   </div>
 
-  <div class="relative z-10 w-full max-w-[1440px] mx-auto px-10 pb-20">
+  <!-- Insignia: Perfectly Centered on Mobile, Right Center on Desktop -->
+  <div class="absolute inset-0 z-10 pointer-events-none flex flex-col items-center justify-center lg:items-end lg:pr-24">
+    <div class="opacity-0 animate-fade-up" style="animation-delay: 0.1s;">
+      <img 
+        src="/assets/honsdainsignajava.svg" 
+        alt="" 
+        class="h-40 md:h-56 lg:h-72 w-auto object-contain insignia-glow pointer-events-auto" 
+        aria-hidden="true" 
+      />
+    </div>
+  </div>
+
+  <!-- Main Content: Always bottom-left -->
+  <div class="relative z-20 w-full h-full max-w-[1440px] mx-auto px-10 pb-20 flex items-end">
     <div class="max-w-2xl">
       <span class="block font-mono text-[9.5px] text-indigo uppercase tracking-[0.22em] mb-4 overflow-hidden">
         <span class="inline-block animate-fade-up">
-          — honsda / frontend / UI/UX
+          — honsda / frontend / UI/UX / i like cats
         </span>
       </span>
 
       <h1 class="font-display font-black leading-[0.9] text-[clamp(3rem,8vw,4.2rem)] flex flex-col">
-        <span class="line-1 text-transparent opacity-0 animate-fade-up" style="-webkit-text-stroke: 1.2px rgba(232,228,220,0.25); animation-delay: 0.15s;">
+        <span class="line-1 text-transparent opacity-0 animate-fade-up" style="-webkit-text-stroke: 1.2px rgba(232,228,220,0.25); animation-delay: 0.25s;">
           interfaces
         </span>
-        <span class="line-2 text-paper opacity-0 animate-fade-up" style="animation-delay: 0.3s;">
+        <span class="line-2 text-paper opacity-0 animate-fade-up" style="animation-delay: 0.4s;">
           built with
         </span>
-        <span class="line-3 text-indigo opacity-0 animate-fade-up" style="animation-delay: 0.45s;">
+        <span class="line-3 text-indigo opacity-0 animate-fade-up" style="animation-delay: 0.55s;">
           intention.
         </span>
       </h1>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-10 right-10 flex flex-col items-center gap-2 opacity-0 animate-fade-up" style="animation-delay: 1s;">
+      <div class="flex flex-col items-center gap-4 group">
+        <span class="font-mono text-[9px] uppercase tracking-[0.3em] text-paper-ghost [writing-mode:vertical-lr] group-hover:text-indigo transition-colors duration-500">Scroll</span>
+        
+        <!-- Animated Block Container -->
+        <div class="relative w-[6px] h-16 bg-white/5 overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-4 bg-indigo animate-scroll-block"></div>
+        </div>
+
+        <!-- Minimal Arrow SVG -->
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-indigo animate-bounce-subtle">
+          <path d="M1 5L6 10L11 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
+        </svg>
+      </div>
     </div>
   </div>
 </section>
@@ -57,5 +92,35 @@
 
   .animate-fade-up {
     animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .insignia-glow {
+    /* Force SVG to be bright white */
+    filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 30px rgba(120, 128, 168, 0.3));
+    opacity: 0.95;
+    transition: opacity 0.5s ease, filter 0.5s ease;
+  }
+
+  .insignia-glow:hover {
+    filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 50px rgba(120, 128, 168, 0.5));
+    opacity: 1;
+  }
+
+  @keyframes scrollBlock {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(400%); } /* Slides through the 16px block height */
+  }
+
+  .animate-scroll-block {
+    animation: scrollBlock 2.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+
+  @keyframes bounceSubtle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+  }
+
+  .animate-bounce-subtle {
+    animation: bounceSubtle 2s ease-in-out infinite;
   }
 </style>
