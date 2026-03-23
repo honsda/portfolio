@@ -14,12 +14,33 @@
       >
         See my work
       </a>
-      <a 
-        href="mailto:your@email.com" 
+      <button 
+        id="copy-email-strip"
+        data-email="moehd.abdullah@gmail.com"
         class="border border-paper-ghost text-paper-ghost font-mono text-[9px] uppercase tracking-[0.2em] px-6 py-3 transition-all duration-300 hover:border-paper hover:text-paper"
       >
         Get in touch
-      </a>
+      </button>
     </div>
   </div>
 </div>
+
+<script>
+  const btnStrip = document.getElementById('copy-email-strip');
+  btnStrip?.addEventListener('click', () => {
+    const email = btnStrip.getAttribute('data-email') || "";
+    navigator.clipboard.writeText(email);
+    
+    const originalText = btnStrip.innerText;
+    btnStrip.innerText = "Copied!";
+    
+    // Open mail client
+    setTimeout(() => {
+      window.location.href = `mailto:${email}`;
+    }, 100);
+
+    setTimeout(() => {
+      btnStrip.innerText = originalText;
+    }, 2000);
+  });
+</script>

@@ -50,9 +50,9 @@
   }
 
   onMount(() => {
-    // Check for touch capability or small screen
+    // Only disable for touch devices, not just small widths
     const touchQuery = window.matchMedia('(pointer: coarse)');
-    isMobile = touchQuery.matches || window.innerWidth < 768;
+    isMobile = touchQuery.matches;
 
     if (isMobile) return;
 

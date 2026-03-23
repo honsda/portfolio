@@ -12,7 +12,7 @@
     Open to remote part-time work — frontend development, UI/UX, spatial web. Based in Surabaya, Indonesia. Async-friendly.
   </p>
 
-  <div class="flex flex-col sm:flex-row items-center gap-4 fade-up">
+  <div class="flex flex-col sm:flex-row items-center gap-4 fade-up mb-4">
     <a 
       href="https://github.com/honsda" 
       target="_blank" 
@@ -21,11 +21,42 @@
     >
       GitHub
     </a>
-    <a 
-      href="mailto:your@email.com" 
+    <button 
+      id="copy-email-contact"
+      data-email="moehd.abdullah@gmail.com"
       class="border border-paper-ghost text-paper-ghost font-mono text-[9px] uppercase tracking-[0.2em] px-10 py-4 transition-all duration-300 hover:border-paper hover:text-paper w-full sm:w-auto"
     >
       Email me
-    </a>
+    </button>
   </div>
+
+  <script>
+    const btn = document.getElementById('copy-email-contact');
+    btn?.addEventListener('click', () => {
+      const email = btn.getAttribute('data-email') || "";
+      navigator.clipboard.writeText(email);
+      
+      const originalText = btn.innerText;
+      btn.innerText = "Copied!";
+      
+      // Open mail client
+      setTimeout(() => {
+        window.location.href = `mailto:${email}`;
+      }, 100);
+
+      setTimeout(() => {
+        btn.innerText = originalText;
+      }, 2000);
+    });
+  </script>
+
+  <a 
+    href="https://discord.gg/pj4f68tj"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="group grid place-items-center border border-[#5865F2]/30 text-[#5865F2]/70 font-mono text-[9px] uppercase tracking-[0.2em] px-10 py-4 transition-all duration-300 hover:border-[#5865F2] hover:text-[#5865F2] fade-up w-full sm:w-auto"
+  >
+    <span class="col-start-1 row-start-1 group-hover:invisible">Discord</span>
+    <span class="col-start-1 row-start-1 invisible group-hover:visible lowercase">honsda</span>
+  </a>
 </section>

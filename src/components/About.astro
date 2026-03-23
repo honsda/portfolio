@@ -7,7 +7,7 @@
     }
   </style>
   <!-- Integrated Profile Image -->
-  <div class="absolute top-0 right-0 pt-16 pr-16 hidden lg:block fade-up pointer-events-none">
+  <div class="profile-image-container absolute top-0 right-0 pt-16 pr-16 hidden lg:block fade-up pointer-events-none">
     <div class="relative group">
       <!-- Ambient Glow -->
       <div class="absolute inset-0 bg-indigo opacity-20 blur-[50px] rounded-full group-hover:opacity-30 transition-opacity duration-700"></div>
@@ -17,6 +17,7 @@
           src="https://github.com/honsda.png" 
           alt="honsda" 
           class="w-56 h-56 lg:w-64 lg:h-64 object-cover grayscale brightness-90 transition-all duration-700"
+          onerror="this.closest('.profile-image-container').style.display='none'"
           style="
             opacity: 0.75;
             mask-image: radial-gradient(circle at center, black 15%, transparent 80%);

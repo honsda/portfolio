@@ -6,23 +6,33 @@ import Leaves from './Leaves.svelte';
   <Leaves client:load />
 
   <!-- Hero Art: Mountain Vector Layer -->
-  <div class="absolute bottom-0 right-0 w-full h-[70%] lg:w-3/4 lg:h-3/4 z-0 pointer-events-none overflow-hidden">
-    <img 
-      src="/assets/mountainvectors.svg" 
-      alt="" 
-      class="w-full h-full object-cover lg:object-contain object-bottom lg:object-right-bottom opacity-20 mix-blend-lighten" 
-      aria-hidden="true" 
-      style="mask-image: radial-gradient(circle at 100% 100%, black 20%, transparent 95%); -webkit-mask-image: radial-gradient(circle at 100% 100%, black 20%, transparent 95%);"
-    />
+  <div 
+    class="absolute bottom-0 right-0 w-full h-[70%] lg:w-3/4 lg:h-3/4 z-0 pointer-events-none overflow-hidden"
+    style="mask-image: radial-gradient(circle at 100% 100%, black 20%, transparent 95%); -webkit-mask-image: radial-gradient(circle at 100% 100%, black 20%, transparent 95%);"
+  >
+    <div 
+      class="w-full h-full bg-indigo opacity-35 mix-blend-lighten"
+      style="
+        filter: saturate(1.8);
+        mask-image: url('/assets/mountainvectors.svg');
+        -webkit-mask-image: url('/assets/mountainvectors.svg');
+        mask-size: cover;
+        -webkit-mask-size: cover;
+        mask-position: bottom;
+        -webkit-mask-position: bottom;
+        mask-repeat: no-repeat;
+        -webkit-mask-repeat: no-repeat;
+      "
+    ></div>
   </div>
 
-  <!-- Insignia: Perfectly Centered on Mobile, Right Center on Desktop -->
-  <div class="absolute inset-0 z-10 pointer-events-none flex flex-col items-center justify-center lg:items-end lg:pr-24">
-    <div class="opacity-0 animate-fade-up" style="animation-delay: 0.1s;">
+  <!-- Insignia: Top Right on Mobile, Right Center on Desktop -->
+  <div class="absolute inset-0 z-30 pointer-events-none flex flex-col items-end justify-start pt-24 pr-6 lg:justify-center lg:pt-0 lg:pr-24">
+    <div class="opacity-0 animate-fade-up relative z-30" style="animation-delay: 0.1s;">
       <img 
         src="/assets/honsdainsignajava.svg" 
         alt="" 
-        class="h-40 md:h-56 lg:h-72 w-auto object-contain insignia-glow pointer-events-auto" 
+        class="h-28 md:h-56 lg:h-72 w-auto object-contain insignia-glow pointer-events-auto" 
         aria-hidden="true" 
       />
     </div>
