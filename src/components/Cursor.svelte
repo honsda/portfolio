@@ -12,7 +12,11 @@
   let canvas;
   let ctx;
   let points = [];
-  const MAX_POINTS = 60; // Longer tail
+  const MAX_POINTS = 45; // Bit longer tail
+
+  // Smoothing states
+  let trailX = -100;
+  let trailY = -100;
 
   const lerp = (start, end, factor) => start + (end - start) * factor;
 
@@ -65,23 +69,34 @@
       ringX = lerp(ringX, mouseX, 0.15);
       ringY = lerp(ringY, mouseY, 0.15);
 
-      // Pull back effect: always push current position if clicked
+      // Smooth Trail Logic
       if (isClicked) {
-        points.push({ x: mouseX, y: mouseY });
-        if (points.length > MAX_POINTS) points.shift();
+        if (points.length === 0) {
+          points = Array(MAX_POINTS).fill({ x: mouseX, y: mouseY });
+        }
+        
+        // Point 0 follows mouse directly
+        points[0] = { x: mouseX, y: mouseY };
+        
+        // Each subsequent point lerps to the one before it for an elastic effect
+        for (let i = 1; i < points.length; i++) {
+          points[i] = {
+            x: lerp(points[i].x, points[i - 1].x, 0.45), // Adjust for smoothness/speed
+            y: lerp(points[i].y, points[i - 1].y, 0.45)
+          };
+        }
       }
 
       // Draw Trail
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      if (points.length > 2) {
+      if (isClicked && points.length > 2) {
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
 
-        // Draw multiple segments for tapering effect
         for (let i = 1; i < points.length; i++) {
-          const ratio = i / points.length;
-          const size = ratio * 6; 
+          const ratio = (points.length - i) / points.length; // Tail is smaller
+          const size = ratio * 5; 
           
           ctx.beginPath();
           ctx.moveTo(points[i-1].x, points[i-1].y);
@@ -93,10 +108,9 @@
         }
       }
 
-      // Age and prune points
+      // Reset points on release
       if (!isClicked && points.length > 0) {
-        points.shift();
-        if (points.length > 0) points.shift(); // Faster collapse
+        points = [];
       }
 
       requestAnimationFrame(animate);
