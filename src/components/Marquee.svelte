@@ -8,7 +8,7 @@
     <!-- First set -->
     {#each items as item}
       <div class="marquee-item flex items-center shrink-0">
-        <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-indigo-DEFAULT px-8">
+        <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-indigo px-8">
           {item}
         </span>
         <span class="text-paper-ghost opacity-40 select-none">•</span>
@@ -17,7 +17,7 @@
     <!-- Duplicate set for seamless loop -->
     {#each items as item}
       <div class="marquee-item flex items-center shrink-0">
-        <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-indigo-DEFAULT px-8">
+        <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-indigo px-8">
           {item}
         </span>
         <span class="text-paper-ghost opacity-40 select-none">•</span>

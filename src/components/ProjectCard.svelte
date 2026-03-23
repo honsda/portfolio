@@ -15,7 +15,7 @@
 >
   <!-- Animated Top Border -->
   <div 
-    class="absolute top-0 left-0 right-0 h-[1.5px] bg-indigo-DEFAULT transition-transform duration-500 origin-left"
+    class="absolute top-0 left-0 right-0 h-[1.5px] bg-indigo transition-transform duration-500 origin-left"
     class:scale-x-100={featured}
     class:scale-x-0={!featured}
     class:group-hover:scale-x-100={!featured}
@@ -37,7 +37,7 @@
     <div class="flex flex-col gap-6">
       <div class="flex flex-wrap gap-x-4 gap-y-2">
         {#each tags as tag}
-          <span class="font-mono text-[8.5px] uppercase tracking-[0.18em] text-indigo-DEFAULT">
+          <span class="font-mono text-[8.5px] uppercase tracking-[0.18em] text-indigo">
             {tag}
           </span>
         {/each}

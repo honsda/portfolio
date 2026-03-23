@@ -6,6 +6,7 @@
   let ringX = -100;
   let ringY = -100;
   let isHovering = false;
+  let isClicked = false;
   let isMobile = false;
 
   const lerp = (start, end, factor) => start + (end - start) * factor;
@@ -24,12 +25,17 @@
     }
   }
 
+  function handleMouseDown() { isClicked = true; }
+  function handleMouseUp() { isClicked = false; }
+
   onMount(() => {
     isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     if (isMobile) return;
 
     window.addEventListener('mousemove', moveCursor);
     window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
 
     function animate() {
       ringX = lerp(ringX, mouseX, 0.12);
@@ -41,6 +47,8 @@
     return () => {
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
     };
   });
 </script>
@@ -48,12 +56,11 @@
 {#if !isMobile}
 <div 
   class="cursor-dot" 
-  style="transform: translate({mouseX - 5}px, {mouseY - 5}px)"
+  style="transform: translate({mouseX - 5}px, {mouseY - 5}px) scale({isClicked ? 0.6 : 1})"
 ></div>
 <div 
   class="cursor-ring" 
-  class:hover={isHovering}
-  style="transform: translate({ringX - 18}px, {ringY - 18}px) scale({isHovering ? 1.8 : 1})"
+  style="transform: translate({ringX - 18}px, {ringY - 18}px) scale({isHovering ? 1.6 : 1})"
 ></div>
 {/if}
 
@@ -69,6 +76,7 @@
     pointer-events: none;
     z-index: 10000;
     mix-blend-mode: difference;
+    transition: transform 0.15s ease-out;
   }
 
   .cursor-ring {
