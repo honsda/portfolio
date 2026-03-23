@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 ---
 <section id="contact" class="max-w-2xl mx-auto px-10 py-48 text-center flex flex-col items-center">
   <span class="section-label fade-up">// Contact</span>
@@ -19,7 +20,7 @@
       rel="noopener noreferrer"
       class="bg-paper text-ink-black font-mono text-[9px] uppercase tracking-[0.2em] px-10 py-4 transition-colors duration-300 hover:bg-paper-mid w-full sm:w-auto flex items-center justify-center gap-2"
     >
-      <i class="devicon-github-original text-[14px]"></i>
+      <Icon name="iconoir:github" class="w-4 h-4" />
       GitHub
     </a>
     <button 
@@ -27,9 +28,7 @@
       data-email="moehd.abdullah@gmail.com"
       class="border border-paper-ghost text-paper-ghost font-mono text-[9px] uppercase tracking-[0.2em] px-10 py-4 transition-all duration-300 hover:border-paper hover:text-paper w-full sm:w-auto flex items-center justify-center gap-2"
     >
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-paper-ghost">
-        <path d="M2 3H12V11H2V3ZM2 3L7 7.5L12 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
-      </svg>
+      <Icon name="iconoir:mail" class="w-4 h-4" />
       <span>Email me</span>
     </button>
   </div>
@@ -63,7 +62,7 @@
     class="group grid place-items-center border border-[#5865F2]/30 text-[#5865F2]/70 font-mono text-[9px] uppercase tracking-[0.2em] px-10 py-4 transition-all duration-300 hover:border-[#5865F2] hover:text-[#5865F2] fade-up w-full sm:w-auto"
   >
     <div class="col-start-1 row-start-1 flex items-center gap-2 group-hover:invisible">
-      <i class="devicon-discord-plain text-[14px]"></i>
+      <Icon name="iconoir:discord" class="w-4 h-4" />
       <span>Discord</span>
     </div>
     <span class="col-start-1 row-start-1 invisible group-hover:visible lowercase">honsda</span>

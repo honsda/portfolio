@@ -1,0 +1,136 @@
+<script>
+  import { onMount } from 'svelte';
+
+  let leaves = $state([]);
+
+  const indigoColors = [
+    '#7880a8', // Default Indigo
+    '#5a628f', // Deeper Indigo
+    '#9ea4c4', // Lighter/Muted Indigo
+    '#1a1e2e', // Very Dark Indigo
+    '#4a5175'  // Mid-tone Indigo
+  ];
+  
+  function getLeafCount() {
+    if (typeof window === 'undefined') return 17;
+    return window.innerWidth < 768 ? 13 : 20;
+  }
+
+  function createLeaf(id) {
+    const size = 12 + Math.random() * 20;
+    const duration = 8 + Math.random() * 8; // Faster horizontal "gush"
+    const delay = Math.random() * -15;
+    const opacity = 0.2 + Math.random() * 0.4;
+    
+    // Start strictly on the left (behind title)
+    const startX = -10 + Math.random() * 15; 
+    const startYOffset = 0 + Math.random() * 200; // Controlled vertical spread
+    
+    const swayAmount = 30 + Math.random() * 60;
+    const tumbleSpeed = 2 + Math.random() * 4;
+    
+    return {
+      id,
+      startX,
+      startYOffset,
+      size,
+      duration,
+      delay,
+      opacity,
+      swayAmount,
+      tumbleSpeed,
+      color: indigoColors[Math.floor(Math.random() * indigoColors.length)]
+    };
+  }
+
+  onMount(() => {
+    leaves = Array.from({ length: getLeafCount() }, (_, i) => createLeaf(i));
+  });
+</script>
+
+<div class="gush-container">
+  {#each leaves as leaf (leaf.id)}
+    <div 
+      class="leaf-wrapper"
+      style="
+        left: {leaf.startX}%;
+        top: {leaf.startYOffset}px;
+        color: {leaf.color};
+        --size: {leaf.size}px;
+        --opacity: {leaf.opacity};
+        --duration: {leaf.duration}s;
+        --delay: {leaf.delay}s;
+        --sway: {leaf.swayAmount}px;
+        --tumble: {leaf.tumbleSpeed}s;
+      "
+    >
+      <div class="leaf-tumble">
+        <svg viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 7C0 7 6 0 12 0C18 0 24 7 24 7C24 7 18 14 12 14C6 14 0 7 0 7Z" fill="currentColor"/>
+        </svg>
+      </div>
+    </div>
+  {/each}
+</div>
+
+<style>
+  .gush-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+    perspective: 1200px;
+  }
+
+  .leaf-wrapper {
+    position: absolute;
+    width: var(--size);
+    height: calc(var(--size) * 0.6);
+    filter: none;
+    will-change: transform, opacity;
+    animation: horizontalGush var(--duration) linear infinite;
+    animation-delay: var(--delay);
+    opacity: 0;
+  }
+
+  .leaf-tumble {
+    width: 100%;
+    height: 100%;
+    animation: tumble var(--tumble) ease-in-out infinite alternate;
+  }
+
+  @keyframes horizontalGush {
+    0% {
+      transform: translateX(0) translateY(0) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: var(--opacity);
+    }
+    40% {
+      opacity: var(--opacity);
+    }
+    /* Fade out starts before 60% and gone by 60% of width */
+    60% {
+      transform: translateX(60vw) translateY(calc(var(--sway) * 0.5)) rotate(180deg);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(100vw) translateY(var(--sway)) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes tumble {
+    0% {
+      transform: rotateX(0deg) rotateY(0deg) translateX(0);
+    }
+    100% {
+      transform: rotateX(180deg) rotateY(45deg) translateX(var(--sway));
+    }
+  }
+</style>

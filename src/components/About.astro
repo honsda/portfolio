@@ -1,4 +1,5 @@
 ---
+import GushingLeaves from './GushingLeaves.svelte';
 ---
 <section id="about" class="relative max-w-[1440px] mx-auto px-10 py-32">
   <style>
@@ -6,38 +7,46 @@
       color: #bbbbbb;
     }
   </style>
-  <!-- Integrated Profile Image -->
-  <div class="profile-image-container absolute top-0 right-0 pt-16 pr-16 hidden lg:block fade-up pointer-events-none">
-    <div class="relative group">
-      <!-- Ambient Glow -->
-      <div class="absolute inset-0 bg-indigo opacity-20 blur-[50px] rounded-full group-hover:opacity-30 transition-opacity duration-700"></div>
-      
-      <div class="relative">
-        <img 
-          src="https://github.com/honsda.png" 
-          alt="honsda" 
-          class="w-56 h-56 lg:w-64 lg:h-64 object-cover grayscale brightness-90 transition-all duration-700"
-          onerror="this.closest('.profile-image-container').style.display='none'"
-          style="
-            opacity: 0.75;
-            mask-image: radial-gradient(circle at center, black 15%, transparent 80%);
-            -webkit-mask-image: radial-gradient(circle at center, black 15%, transparent 80%);
-            filter: grayscale(1) brightness(1) contrast(1.1);
-          "
-        />
-      </div>
-    </div>
-  </div>
 
   <span class="section-label fade-up">// About</span>
-  
-  <h2 class="text-[clamp(2.5rem,6vw,3.5rem)] font-black leading-none mb-20 fade-up">
-    Developer.<br />
-    Designer.<br />
-    Builder.
-  </h2>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
+  <div class="relative">
+    <!-- Integrated Profile Image -->
+    <div class="profile-image-container absolute top-0 right-0 pr-16 hidden lg:block fade-up pointer-events-none">
+      <div class="relative group">
+        <!-- Ambient Glow -->
+        <div class="absolute inset-0 bg-indigo opacity-20 blur-[50px] rounded-full group-hover:opacity-30 transition-opacity duration-700"></div>
+        
+        <div class="relative">
+          <img 
+            src="https://github.com/honsda.png" 
+            alt="honsda" 
+            class="w-56 h-56 lg:w-64 lg:h-64 object-cover grayscale brightness-90 transition-all duration-700"
+            onerror="this.closest('.profile-image-container').style.display='none'"
+            style="
+              opacity: 0.75;
+              mask-image: radial-gradient(circle at center, black 15%, transparent 80%);
+              -webkit-mask-image: radial-gradient(circle at center, black 15%, transparent 80%);
+              filter: grayscale(1) brightness(1) contrast(1.1);
+            "
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Gushing Leaves positioned relative to title -->
+    <div class="absolute -top-2 left-0 w-full h-64 z-0 pointer-events-none overflow-hidden">
+      <GushingLeaves client:load />
+    </div>
+
+    <h2 class="relative z-10 text-[clamp(2.5rem,6vw,3.5rem)] font-black leading-none mb-20 fade-up">
+      Developer.<br />
+      Designer.<br />
+      Builder.
+    </h2>
+  </div>
+
+  <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
     <!-- Left — Bio -->
     <div class="space-y-8 font-mono text-[10px] text-[#999999] leading-[1.9] fade-up">
       <p>

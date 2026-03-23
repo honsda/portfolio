@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 ---
 <nav class="fixed top-0 left-0 right-0 z-[100] border-b border-white/5 bg-ink-black/80 backdrop-blur-md">
@@ -20,9 +21,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
     </div>
 
     <button class="md:hidden font-mono text-[10px] text-paper-ghost uppercase tracking-[0.2em] flex items-center gap-2">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-paper-ghost">
-        <path d="M2 4H12M2 7H12M2 10H12" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
-      </svg>
+      <Icon name="iconoir:menu" class="w-4 h-4" />
       <span>Menu</span>
     </button>
   </div>

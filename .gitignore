@@ -4,6 +4,9 @@ node_modules/
 # Build artifacts
 dist/
 .astro/
+.output/
+.vercel/
+.netlify/
 
 # Logs
 npm-debug.log*
@@ -20,6 +23,9 @@ pnpm-debug.log*
 # OS files
 .DS_Store
 Thumbs.db
+._*
+.Spotlight-V100
+.Trashes
 
 # Editor files
 .vscode/
@@ -29,6 +35,7 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+*.tsbuildinfo
 
 # Testing
 coverage/
