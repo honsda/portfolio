@@ -1,70 +1,75 @@
 ---
 import { Icon } from 'astro-icon/components';
+import ContactBackground from './ContactBackground.svelte';
 ---
-<section id="contact" class="max-w-2xl mx-auto px-10 py-48 text-center flex flex-col items-center">
-  <span class="section-label fade-up">// Contact</span>
-  
-  <h2 class="text-[clamp(2.5rem,6vw,3.5rem)] font-black leading-none mb-8 fade-up">
-    Let's work<br />
-    together.
-  </h2>
+<section id="contact" class="relative overflow-hidden w-full py-48 border-t border-white/5">
+  <ContactBackground client:load />
 
-  <p class="font-mono text-[10px] text-[#888888] leading-[1.9] mb-12 fade-up max-w-lg">
-    Open to remote part-time work — frontend development, UI/UX, spatial web. Based in Surabaya, Indonesia. Async-friendly.
-  </p>
+  <div class="relative z-10 max-w-2xl mx-auto px-10 text-center flex flex-col items-center">
+    <span class="section-label fade-up">// Contact</span>
+    
+    <h2 class="text-[clamp(2.5rem,6vw,3.5rem)] font-black leading-none mb-8 fade-up">
+      Let's work<br />
+      together.
+    </h2>
 
-  <div class="flex flex-col sm:flex-row items-center gap-4 fade-up mb-4 w-full sm:w-auto">
-    <a 
-      href="https://github.com/honsda" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      class="bg-paper text-ink-black font-mono text-[9px] uppercase tracking-[0.2em] px-10 py-4 transition-colors duration-300 hover:bg-paper-mid w-full sm:w-auto flex items-center justify-center gap-2"
-    >
-      <Icon name="iconoir:github" class="w-4 h-4" />
-      GitHub
-    </a>
-    <button 
-      id="copy-email-contact"
-      data-email="moehd.abdullah@gmail.com"
-      class="border border-paper-ghost text-paper-ghost font-mono text-[9px] uppercase tracking-[0.2em] px-10 py-4 transition-all duration-300 hover:border-paper hover:text-paper w-full sm:w-auto flex items-center justify-center gap-2"
-    >
-      <Icon name="iconoir:mail" class="w-4 h-4" />
-      <span>Email me</span>
-    </button>
-  </div>
+    <p class="font-mono text-[10px] text-[#888888] leading-[1.9] mb-12 fade-up max-w-lg">
+      Open to remote part-time work — frontend development, UI/UX, spatial web. Based in Surabaya, Indonesia. Async-friendly.
+    </p>
 
-  <script>
-    const btn = document.getElementById('copy-email-contact');
-    btn?.addEventListener('click', () => {
-      const email = btn.getAttribute('data-email') || "";
-      navigator.clipboard.writeText(email);
-      
-      const emailSpan = btn.querySelector('span');
-      
-      const originalText = "Email me";
-      if (emailSpan) emailSpan.innerText = "Copied!";
-      
-      // Open mail client
-      setTimeout(() => {
-        window.location.href = `mailto:${email}`;
-      }, 100);
-
-      setTimeout(() => {
-        if (emailSpan) emailSpan.innerText = originalText;
-      }, 2000);
-    });
-  </script>
-
-  <a 
-    href="https://discord.gg/pj4f68tj"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="group grid place-items-center border border-[#5865F2]/30 text-[#5865F2]/70 font-mono text-[9px] uppercase tracking-[0.2em] px-10 py-4 transition-all duration-300 hover:border-[#5865F2] hover:text-[#5865F2] fade-up w-full sm:w-auto"
-  >
-    <div class="col-start-1 row-start-1 flex items-center gap-2 group-hover:invisible">
-      <Icon name="iconoir:discord" class="w-4 h-4" />
-      <span>Discord</span>
+    <div class="flex flex-col sm:flex-row items-center gap-4 fade-up mb-4 w-full sm:w-auto">
+      <a 
+        href="https://github.com/honsda" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="bg-paper text-ink-black font-mono text-[9px] uppercase tracking-[0.2em] px-10 py-4 transition-colors duration-300 hover:bg-paper-mid w-full sm:w-auto flex items-center justify-center gap-2"
+      >
+        <Icon name="iconoir:github" class="w-4 h-4" />
+        GitHub
+      </a>
+      <button 
+        id="copy-email-contact"
+        data-email="moehd.abdullah@gmail.com"
+        class="border border-paper-ghost text-paper-ghost font-mono text-[9px] uppercase tracking-[0.2em] px-10 py-4 transition-all duration-300 hover:border-paper hover:text-paper w-full sm:w-auto flex items-center justify-center gap-2"
+      >
+        <Icon name="iconoir:mail" class="w-4 h-4" />
+        <span>Email me</span>
+      </button>
     </div>
-    <span class="col-start-1 row-start-1 invisible group-hover:visible lowercase">honsda</span>
-  </a>
+
+    <script>
+      const btn = document.getElementById('copy-email-contact');
+      btn?.addEventListener('click', () => {
+        const email = btn.getAttribute('data-email') || "";
+        navigator.clipboard.writeText(email);
+        
+        const emailSpan = btn.querySelector('span');
+        
+        const originalText = "Email me";
+        if (emailSpan) emailSpan.innerText = "Copied!";
+        
+        // Open mail client
+        setTimeout(() => {
+          window.location.href = `mailto:${email}`;
+        }, 100);
+
+        setTimeout(() => {
+          if (emailSpan) emailSpan.innerText = originalText;
+        }, 2000);
+      });
+    </script>
+
+    <a 
+      href="https://discord.gg/pj4f68tj"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="group grid place-items-center border border-[#5865F2]/30 text-[#5865F2]/70 font-mono text-[9px] uppercase tracking-[0.2em] px-10 py-4 transition-all duration-300 hover:border-[#5865F2] hover:text-[#5865F2] fade-up w-full sm:w-auto"
+    >
+      <div class="col-start-1 row-start-1 flex items-center gap-2 group-hover:invisible">
+        <Icon name="iconoir:discord" class="w-4 h-4" />
+        <span>Discord</span>
+      </div>
+      <span class="col-start-1 row-start-1 invisible group-hover:visible lowercase">honsda</span>
+    </a>
+  </div>
 </section>
