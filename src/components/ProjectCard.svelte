@@ -45,7 +45,9 @@
 
       <div class="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.15em] text-paper-mid">
         View Project
-        <span class="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+          <path d="M3 1H11V9M11 1L1 11" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
+        </svg>
       </div>
     </div>
   </div>
