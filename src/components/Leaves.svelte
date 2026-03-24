@@ -26,7 +26,7 @@
   });
 </script>
 
-<div class="leaves-container">
+<div class="leaves-container animate-fade-in">
   {#each leaves as leaf (leaf.id)}
     <div 
       class="leaf-wrapper"
@@ -98,5 +98,14 @@
       /* Simulate leaf flipping and swaying back/forth */
       transform: rotateX(180deg) rotateY(45deg) translateX(var(--sway));
     }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 3s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 </style>

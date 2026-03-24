@@ -48,7 +48,7 @@
   });
 </script>
 
-<div class="gush-container">
+<div class="gush-container animate-fade-in">
   {#each leaves as leaf (leaf.id)}
     <div 
       class="leaf-wrapper"
@@ -132,5 +132,14 @@
     100% {
       transform: rotateX(180deg) rotateY(45deg) translateX(var(--sway));
     }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 3s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 </style>
