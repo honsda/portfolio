@@ -12,11 +12,7 @@
   let canvas;
   let ctx;
   let points = [];
-  const MAX_POINTS = 45; // Bit longer tail
-
-  // Smoothing states
-  let trailX = -100;
-  let trailY = -100;
+  const MAX_POINTS = 30; // Slightly shorter for performance
 
   const lerp = (start, end, factor) => start + (end - start) * factor;
 
@@ -36,7 +32,7 @@
 
   function handleMouseDown(e) { 
     isClicked = true; 
-    points = Array(10).fill({ x: e.clientX, y: e.clientY }); // Initialize with some points for a smoother start
+    points = Array(5).fill({ x: e.clientX, y: e.clientY });
   }
   function handleMouseUp() { 
     isClicked = false; 
@@ -50,13 +46,12 @@
   }
 
   onMount(() => {
-    // Only disable for touch devices, not just small widths
     const touchQuery = window.matchMedia('(pointer: coarse)');
     isMobile = touchQuery.matches;
 
     if (isMobile) return;
 
-    ctx = canvas.getContext('2d');
+    ctx = canvas.getContext('2d', { alpha: true });
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
@@ -65,59 +60,54 @@
     window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
 
+    let frame;
     function animate() {
+      // Lerp ring towards mouse
       ringX = lerp(ringX, mouseX, 0.15);
       ringY = lerp(ringY, mouseY, 0.15);
 
-      // Smooth Trail Logic
+      // Only handle trail and canvas if clicked
       if (isClicked) {
         if (points.length === 0) {
           points = Array(MAX_POINTS).fill({ x: mouseX, y: mouseY });
         }
         
-        // Point 0 follows mouse directly
         points[0] = { x: mouseX, y: mouseY };
         
-        // Each subsequent point lerps to the one before it for an elastic effect
         for (let i = 1; i < points.length; i++) {
           points[i] = {
-            x: lerp(points[i].x, points[i - 1].x, 0.45), // Adjust for smoothness/speed
-            y: lerp(points[i].y, points[i - 1].y, 0.45)
+            x: lerp(points[i].x, points[i - 1].x, 0.35),
+            y: lerp(points[i].y, points[i - 1].y, 0.35)
           };
         }
-      }
 
-      // Draw Trail
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      if (isClicked && points.length > 2) {
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-
-        for (let i = 1; i < points.length; i++) {
-          const ratio = (points.length - i) / points.length; // Tail is smaller
-          const size = ratio * 5; 
-          
-          ctx.beginPath();
-          ctx.moveTo(points[i-1].x, points[i-1].y);
-          ctx.lineTo(points[i].x, points[i].y);
-          
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (points.length > 2) {
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
           ctx.strokeStyle = '#e8e4dc';
-          ctx.lineWidth = size;
-          ctx.stroke();
-        }
-      }
 
-      // Reset points on release
-      if (!isClicked && points.length > 0) {
+          for (let i = 1; i < points.length; i++) {
+            const ratio = (points.length - i) / points.length;
+            ctx.beginPath();
+            ctx.moveTo(points[i-1].x, points[i-1].y);
+            ctx.lineTo(points[i].x, points[i].y);
+            ctx.lineWidth = ratio * 4; 
+            ctx.stroke();
+          }
+        }
+      } else if (points.length > 0) {
+        // Clear once when released
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         points = [];
       }
 
-      requestAnimationFrame(animate);
+      frame = requestAnimationFrame(animate);
     }
-    animate();
+    frame = requestAnimationFrame(animate);
 
     return () => {
+      cancelAnimationFrame(frame);
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mouseover', handleMouseOver);
@@ -135,11 +125,11 @@
 
 <div 
   class="cursor-dot" 
-  style="transform: translate({mouseX - 5}px, {mouseY - 5}px) scale({isClicked ? 0.6 : 1})"
+  style="transform: translate3d({mouseX - 5}px, {mouseY - 5}px, 0) scale({isClicked ? 0.6 : 1})"
 ></div>
 <div 
   class="cursor-ring" 
-  style="transform: translate({ringX - 18}px, {ringY - 18}px) scale({isHovering ? 1.6 : 1})"
+  style="transform: translate3d({ringX - 18}px, {ringY - 18}px, 0) scale({isHovering ? 1.6 : 1})"
 ></div>
 {/if}
 
@@ -153,6 +143,7 @@
     pointer-events: none;
     z-index: 9998;
     mix-blend-mode: difference;
+    will-change: transform;
   }
 
   .cursor-dot {
@@ -166,7 +157,7 @@
     pointer-events: none;
     z-index: 10000;
     mix-blend-mode: difference;
-    transition: transform 0.15s ease-out;
+    /* Removed transition as it's updated frequently by JS */
   }
 
   .cursor-ring {
@@ -179,6 +170,7 @@
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
-    transition: transform 0.3s ease-out;
+    /* Removed transition on transform as it's lerped in JS */
+    transition: border-color 0.3s ease, transform 0.1s linear; /* Short linear transform for scale only */
   }
 </style>

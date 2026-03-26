@@ -12,19 +12,18 @@
   ];
   
   function getLeafCount() {
-    if (typeof window === 'undefined') return 17;
-    return window.innerWidth < 768 ? 13 : 20;
+    if (typeof window === 'undefined') return 12;
+    return window.innerWidth < 768 ? 8 : 15; // Reduced for performance
   }
 
   function createLeaf(id) {
     const size = 12 + Math.random() * 20;
-    const duration = 8 + Math.random() * 8; // Faster horizontal "gush"
+    const duration = 8 + Math.random() * 8; 
     const delay = Math.random() * -15;
     const opacity = 0.2 + Math.random() * 0.4;
     
-    // Start strictly on the left (behind title)
     const startX = -10 + Math.random() * 15; 
-    const startYOffset = 0 + Math.random() * 200; // Controlled vertical spread
+    const startYOffset = 0 + Math.random() * 200; 
     
     const swayAmount = 30 + Math.random() * 60;
     const tumbleSpeed = 2 + Math.random() * 4;
@@ -105,7 +104,7 @@
 
   @keyframes horizontalGush {
     0% {
-      transform: translateX(0) translateY(0) rotate(0deg);
+      transform: translate3d(0, 0, 0) rotate(0deg);
       opacity: 0;
     }
     10% {
@@ -114,23 +113,22 @@
     40% {
       opacity: var(--opacity);
     }
-    /* Fade out starts before 60% and gone by 60% of width */
     60% {
-      transform: translateX(60vw) translateY(calc(var(--sway) * 0.5)) rotate(180deg);
+      transform: translate3d(60vw, calc(var(--sway) * 0.5), 0) rotate(180deg);
       opacity: 0;
     }
     100% {
-      transform: translateX(100vw) translateY(var(--sway)) rotate(360deg);
+      transform: translate3d(100vw, var(--sway), 0) rotate(360deg);
       opacity: 0;
     }
   }
 
   @keyframes tumble {
     0% {
-      transform: rotateX(0deg) rotateY(0deg) translateX(0);
+      transform: rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0);
     }
     100% {
-      transform: rotateX(180deg) rotateY(45deg) translateX(var(--sway));
+      transform: rotateX(180deg) rotateY(45deg) translate3d(var(--sway), 0, 0);
     }
   }
 

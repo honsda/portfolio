@@ -58,16 +58,18 @@ const projects = [
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 border border-white/5">
     {projects.map((project) => (
-      <LazyLoad client:load rootMargin="400px 0px 400px 0px">
-        <ProjectCard 
-          client:load
-          num={project.num}
-          title={project.title}
-          desc={project.desc}
-          tags={project.tags}
-          link={project.link}
-          featured={project.featured}
-        />
+      <LazyLoad client:load rootMargin="200px 0px 200px 0px">
+        <div class="min-h-[300px] w-full">
+          <ProjectCard 
+            client:load
+            num={project.num}
+            title={project.title}
+            desc={project.desc}
+            tags={project.tags}
+            link={project.link}
+            featured={project.featured}
+          />
+        </div>
       </LazyLoad>
     ))}
   </div>

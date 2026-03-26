@@ -5,7 +5,9 @@ import LazyLoad from './LazyLoad.svelte';
 ---
 <section id="contact" class="relative overflow-hidden w-full py-48 border-t border-white/5">
   <LazyLoad client:load>
-    <ContactBackground client:load />
+    <div class="min-h-[400px]">
+      <ContactBackground client:load />
+    </div>
   </LazyLoad>
 
   <div class="relative z-10 max-w-2xl mx-auto px-10 text-center flex flex-col items-center">

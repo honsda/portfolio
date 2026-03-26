@@ -24,7 +24,9 @@ const marqueeItems = [
 		<Hero />
 		<BottomStrip />
 		<LazyLoad client:load>
-			<Marquee client:load items={marqueeItems} />
+			<div class="min-h-[50px]">
+				<Marquee client:load items={marqueeItems} />
+			</div>
 		</LazyLoad>
 		<About />
 		<Projects />
