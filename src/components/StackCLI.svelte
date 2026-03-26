@@ -11,6 +11,8 @@
     { lang: 'cpp', code: '#include <iostream>\nint main() { return 0; }' }
   ];
 
+  let container;
+  let isVisible = true;
   let currentSnippetIndex = 0;
   let displayText = '';
   let isDeleting = false;
@@ -63,6 +65,11 @@
   }
 
   function type() {
+    if (!isVisible) {
+      timeoutId = setTimeout(type, 500);
+      return;
+    }
+
     const fullText = snippets[currentSnippetIndex].code;
     let typingSpeed = isDeleting ? 30 : 50;
 
@@ -86,6 +93,19 @@
 
   onMount(() => {
     timeoutId = setTimeout(type, 1000);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries[0].isIntersecting;
+      },
+      { threshold: 0 }
+    );
+
+    if (container) observer.observe(container);
+
+    return () => {
+      observer.disconnect();
+    };
   });
 
   onDestroy(() => {
@@ -93,7 +113,7 @@
   });
 </script>
 
-<div class="cli-window border border-white/10 bg-black/40 backdrop-blur-sm rounded-lg overflow-hidden shadow-2xl flex flex-col h-full">
+<div bind:this={container} class="cli-window border border-white/10 bg-black/40 backdrop-blur-sm rounded-lg overflow-hidden shadow-2xl flex flex-col h-full">
   <div class="cli-header bg-white/5 px-4 py-2 flex items-center justify-between border-b border-white/5 shrink-0">
     <div class="flex gap-1.5">
       <div class="w-2.5 h-2.5 rounded-full bg-paper/20"></div>
@@ -105,7 +125,7 @@
     </div>
   </div>
   <div class="cli-body p-5 flex-1 font-mono text-[11px] leading-relaxed text-paper/40 whitespace-pre overflow-hidden">
-    <code>{@html highlight(displayText)}</code><span class="cursor">_</span>
+    <code>{@html highlight(displayText)}</code><span class="cursor" style="animation-play-state: {isVisible ? 'running' : 'paused'}">_</span>
   </div>
 </div>
 

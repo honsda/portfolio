@@ -1,6 +1,8 @@
 <script>
   import { onMount } from 'svelte';
 
+  let container;
+  let isVisible = true;
   let leaves = $state([]);
   
   function getLeafCount() {
@@ -9,7 +11,6 @@
   }
 
   function createLeaf(id) {
-    // ... rest of createLeaf logic
     const size = 10 + Math.random() * 18;
     const duration = 10 + Math.random() * 15;
     const delay = Math.random() * -25;
@@ -23,10 +24,27 @@
 
   onMount(() => {
     leaves = Array.from({ length: getLeafCount() }, (_, i) => createLeaf(i));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries[0].isIntersecting;
+      },
+      { threshold: 0 }
+    );
+
+    if (container) observer.observe(container);
+
+    return () => {
+      observer.disconnect();
+    };
   });
 </script>
 
-<div class="leaves-container animate-fade-in">
+<div 
+  bind:this={container}
+  class="leaves-container animate-fade-in"
+  style="animation-play-state: {isVisible ? 'running' : 'paused'};"
+>
   {#each leaves as leaf (leaf.id)}
     <div 
       class="leaf-wrapper"
@@ -38,9 +56,13 @@
         --delay: {leaf.delay}s;
         --sway: {leaf.swayAmount}px;
         --tumble: {leaf.tumbleSpeed}s;
+        animation-play-state: {isVisible ? 'running' : 'paused'};
       "
     >
-      <div class="leaf-tumble">
+      <div 
+        class="leaf-tumble"
+        style="animation-play-state: {isVisible ? 'running' : 'paused'};"
+      >
         <svg viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M0 7C0 7 6 0 12 0C18 0 24 7 24 7C24 7 18 14 12 14C6 14 0 7 0 7Z" fill="currentColor"/>
         </svg>

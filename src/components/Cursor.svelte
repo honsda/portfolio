@@ -66,6 +66,11 @@
     window.addEventListener('mouseup', handleMouseUp);
 
     function animate() {
+      if (document.hidden) {
+        requestAnimationFrame(animate);
+        return;
+      }
+
       ringX = lerp(ringX, mouseX, 0.15);
       ringY = lerp(ringY, mouseY, 0.15);
 

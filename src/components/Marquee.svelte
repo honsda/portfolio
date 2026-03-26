@@ -1,10 +1,35 @@
 <script>
+  import { onMount } from 'svelte';
   export let items = [];
   export let speed = 30; // speed in seconds for one full rotation
+
+  let container;
+  let isVisible = true;
+
+  onMount(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries[0].isIntersecting;
+      },
+      { threshold: 0 }
+    );
+
+    if (container) observer.observe(container);
+
+    return () => {
+      observer.disconnect();
+    };
+  });
 </script>
 
-<div class="marquee-container border-t border-b border-white/5 bg-ink-deep overflow-hidden">
-  <div class="marquee-content flex py-4 items-center" style="animation-duration: {speed}s">
+<div 
+  bind:this={container}
+  class="marquee-container border-t border-b border-white/5 bg-ink-deep overflow-hidden"
+>
+  <div 
+    class="marquee-content flex py-4 items-center" 
+    style="animation-duration: {speed}s; animation-play-state: {isVisible ? 'running' : 'paused'};"
+  >
     <!-- First set -->
     {#each items as item}
       <div class="marquee-item flex items-center shrink-0">
@@ -28,7 +53,7 @@
 
 <style>
   .marquee-container:hover .marquee-content {
-    animation-play-state: paused;
+    animation-play-state: paused !important;
   }
 
   .marquee-content {

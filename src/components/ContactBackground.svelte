@@ -4,6 +4,9 @@
 
   const { words } = data;
 
+  let container;
+  let isVisible = true;
+
   const colors = [
     '#7880a8', // indigo
     '#e8e4dc', // paper
@@ -36,13 +39,29 @@
 
   onMount(() => {
     lanes = createLanes();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries[0].isIntersecting;
+      },
+      { threshold: 0 }
+    );
+
+    if (container) observer.observe(container);
+
+    return () => {
+      observer.disconnect();
+    };
   });
 </script>
 
-<div class="contact-rolling-bg">
+<div bind:this={container} class="contact-rolling-bg">
   {#each lanes as lane (lane.id)}
     <div class="lane" style="--lane-top: {lane.id * 20}%">
-      <div class="marquee-track">
+      <div 
+        class="marquee-track" 
+        style="animation-play-state: {isVisible ? 'running' : 'paused'};"
+      >
         <div class="marquee-content">
           {#each lane.words as word (word.id)}
             <span 
