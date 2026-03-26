@@ -13,7 +13,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
       {['About', 'Projects', 'Stack', 'Contact'].map((item) => (
         <a 
           href={`#${item.toLowerCase()}`} 
-          class="font-mono text-[10px] uppercase tracking-[0.2em] text-paper-ghost hover:text-paper transition-colors duration-300"
+          class="font-mono text-[10px] uppercase tracking-[0.2em] text-paper-muted hover:text-paper transition-colors duration-300"
         >
           {item}
         </a>

@@ -6,13 +6,13 @@
   let leaves = $state([]);
   
   function getLeafCount() {
-    if (typeof window === 'undefined') return 20;
-    return window.innerWidth < 768 ? 15 : 23;
+    if (typeof window === 'undefined') return 15;
+    return window.innerWidth < 768 ? 10 : 18; // Reduced for performance
   }
 
   function createLeaf(id) {
     const size = 10 + Math.random() * 18;
-    const duration = 10 + Math.random() * 15;
+    const duration = 12 + Math.random() * 15; // Slightly slower
     const delay = Math.random() * -25;
     const opacity = 0.15 + Math.random() * 0.35;
     const startX = Math.random() * 100;
@@ -104,21 +104,19 @@
 
   @keyframes fall {
     0% {
-      transform: translateY(0) translateX(0) rotate(0deg);
+      transform: translate3d(0, 0, 0) rotate(0deg);
     }
     100% {
-      /* Fall past the bottom and drift horizontally based on sway */
-      transform: translateY(110vh) translateX(calc(var(--sway) * -1.5)) rotate(360deg);
+      transform: translate3d(calc(var(--sway) * -1.5), 110vh, 0) rotate(360deg);
     }
   }
 
   @keyframes tumble {
     0% {
-      transform: rotateX(0deg) rotateY(0deg) translateX(0);
+      transform: rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0);
     }
     100% {
-      /* Simulate leaf flipping and swaying back/forth */
-      transform: rotateX(180deg) rotateY(45deg) translateX(var(--sway));
+      transform: rotateX(180deg) rotateY(45deg) translate3d(var(--sway), 0, 0);
     }
   }
 

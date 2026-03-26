@@ -1,10 +1,11 @@
 ---
 import GushingLeaves from './GushingLeaves.svelte';
+import LazyLoad from './LazyLoad.svelte';
 ---
 <section id="about" class="relative max-w-[1440px] mx-auto px-10 py-32">
   <style>
     #about strong {
-      color: #bbbbbb;
+      color: var(--paper-default);
     }
   </style>
 
@@ -24,10 +25,10 @@ import GushingLeaves from './GushingLeaves.svelte';
             class="w-56 h-56 lg:w-64 lg:h-64 object-cover grayscale brightness-90 transition-all duration-700"
             onerror="this.closest('.profile-image-container').style.display='none'"
             style="
-              opacity: 0.75;
+              opacity: 0.85;
               mask-image: radial-gradient(circle at center, black 15%, transparent 80%);
               -webkit-mask-image: radial-gradient(circle at center, black 15%, transparent 80%);
-              filter: grayscale(1) brightness(1) contrast(1.1);
+              filter: grayscale(1) brightness(1.1) contrast(1.1);
             "
           />
         </div>
