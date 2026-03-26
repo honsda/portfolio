@@ -1,9 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components';
 import ContactBackground from './ContactBackground.svelte';
+import LazyLoad from './LazyLoad.svelte';
 ---
 <section id="contact" class="relative overflow-hidden w-full py-48 border-t border-white/5">
-  <ContactBackground client:load />
+  <LazyLoad client:load>
+    <ContactBackground client:load />
+  </LazyLoad>
 
   <div class="relative z-10 max-w-2xl mx-auto px-10 text-center flex flex-col items-center">
     <span class="section-label fade-up">// Contact</span>
@@ -13,7 +16,7 @@ import ContactBackground from './ContactBackground.svelte';
       together.
     </h2>
 
-    <p class="font-mono text-[10px] text-[#888888] leading-[1.9] mb-12 fade-up max-w-lg">
+    <p class="font-mono text-[10px] text-paper-dim leading-[1.9] mb-12 fade-up max-w-lg">
       frontend development, UI/UX, spatial web. Based in Surabaya, Indonesia. Always open to new opportunities and collaborations, so don't hesitate to reach out.
     </p>
 

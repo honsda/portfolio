@@ -1,10 +1,11 @@
 ---
 import GushingLeaves from './GushingLeaves.svelte';
+import LazyLoad from './LazyLoad.svelte';
 ---
 <section id="about" class="relative max-w-[1440px] mx-auto px-10 py-32">
   <style>
     #about strong {
-      color: #bbbbbb;
+      color: var(--paper-default);
     }
   </style>
 
@@ -24,10 +25,10 @@ import GushingLeaves from './GushingLeaves.svelte';
             class="w-56 h-56 lg:w-64 lg:h-64 object-cover grayscale brightness-90 transition-all duration-700"
             onerror="this.closest('.profile-image-container').style.display='none'"
             style="
-              opacity: 0.75;
+              opacity: 0.85;
               mask-image: radial-gradient(circle at center, black 15%, transparent 80%);
               -webkit-mask-image: radial-gradient(circle at center, black 15%, transparent 80%);
-              filter: grayscale(1) brightness(1) contrast(1.1);
+              filter: grayscale(1) brightness(1.1) contrast(1.1);
             "
           />
         </div>
@@ -36,7 +37,9 @@ import GushingLeaves from './GushingLeaves.svelte';
 
     <!-- Gushing Leaves positioned relative to title -->
     <div class="absolute -top-2 left-0 w-full h-64 z-0 pointer-events-none overflow-hidden">
-      <GushingLeaves client:load />
+      <LazyLoad client:load>
+        <GushingLeaves client:load />
+      </LazyLoad>
     </div>
 
     <h2 class="relative z-10 text-[clamp(2.5rem,6vw,3.5rem)] font-black leading-none mb-4 fade-up">
@@ -44,15 +47,15 @@ import GushingLeaves from './GushingLeaves.svelte';
       Designer.<br />
       Builder.
     </h2>
-    <p class="relative z-10 fade-up font-mono text-[10px] text-[#bbbbbb] mb-16 uppercase tracking-[0.4em]">Muhammad Abdullah</p>
+    <p class="relative z-10 fade-up font-mono text-[10px] text-paper-mid mb-16 uppercase tracking-[0.4em]">Muhammad Abdullah</p>
   </div>
 
   <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
     <!-- Left — Bio -->
-    <div class="space-y-8 font-mono text-[10px] text-[#999999] leading-[1.9] fade-up">
+    <div class="space-y-8 font-mono text-[10px] text-paper-dim leading-[1.9] fade-up">
       <div class="flex flex-col gap-1">
         <p>hey, call me hons</p>
-        <p class="text-[8px] opacity-40 tracking-widest">or call me abdullah</p>
+        <p class="text-[8px] opacity-60 tracking-widest">or call me abdullah</p>
       </div>
       <p>
         I'm a <strong>computer engineering student</strong> at <strong><a href="https://its.ac.id" target="_blank" rel="noopener noreferrer" class="text-indigo hover:text-white underline decoration-white/20 underline-offset-4 transition-all">Institut Teknologi Sepuluh Nopember (ITS)</a></strong> and frontend developer working across frameworks, 

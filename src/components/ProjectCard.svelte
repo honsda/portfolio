@@ -30,10 +30,10 @@
       <h3 class="font-display text-xl font-bold text-paper-mid mb-3 transition-colors duration-300 group-hover:text-paper">
         {title}
       </h3>
-      <p class="font-mono text-[9px] text-[#888888] leading-[1.8] line-clamp-3">
+      <p class="font-mono text-[9px] text-paper-dim leading-[1.8] line-clamp-3">
         {desc}
       </p>
-    </div>
+      </div>
 
     <div class="flex flex-col gap-6">
       <div class="flex flex-wrap gap-x-4 gap-y-2">
