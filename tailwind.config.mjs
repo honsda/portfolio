@@ -13,13 +13,13 @@ export default {
       paper: {
         DEFAULT: '#e8e4dc',
         mid: '#c8c4bc',
-        dim: '#777777',
-        muted: '#555555',
-        ghost: '#444444',
+        dim: '#999999',
+        muted: '#777777',
+        ghost: '#666666',
       },
       indigo: {
         DEFAULT: '#7880a8',
-        muted: '#3a3f5c',
+        muted: '#5a628f',
         faint: '#1a1e2e',
       },
       white: '#ffffff',

@@ -120,11 +120,11 @@
       <div class="w-2.5 h-2.5 rounded-full bg-paper/20"></div>
       <div class="w-2.5 h-2.5 rounded-full bg-paper/20"></div>
     </div>
-    <div class="font-mono text-[9px] uppercase tracking-[0.2em] text-paper/40">
+    <div class="font-mono text-[9px] uppercase tracking-[0.2em] text-paper/60">
       {snippets[currentSnippetIndex].lang}
     </div>
   </div>
-  <div class="cli-body p-5 flex-1 font-mono text-[11px] leading-relaxed text-paper/40 whitespace-pre overflow-hidden">
+  <div class="cli-body p-5 flex-1 font-mono text-[11px] leading-relaxed text-paper/60 whitespace-pre overflow-hidden">
     <code>{@html highlight(displayText)}</code><span class="cursor" style="animation-play-state: {isVisible ? 'running' : 'paused'}">_</span>
   </div>
 </div>

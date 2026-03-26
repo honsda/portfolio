@@ -71,16 +71,16 @@ const stack = [
 
     <div class="border-t border-white/5">
       {stack.map((group) => (
-        <div class={`flex flex-col md:flex-row border-b border-white/5 py-8 group transition-colors duration-300 fade-up ${group.dimmed ? 'opacity-30' : ''}`}>
-          <div class={`w-[110px] shrink-0 font-mono text-[8.5px] uppercase tracking-[0.2em] mb-4 md:mb-0 ${group.dimmed ? 'text-[#1e1e26]' : 'text-indigo-muted'}`}>
+        <div class={`flex flex-col md:flex-row border-b border-white/5 py-8 group transition-colors duration-300 fade-up ${group.dimmed ? 'opacity-50' : ''}`}>
+          <div class={`w-[110px] shrink-0 font-mono text-[8.5px] uppercase tracking-[0.2em] mb-4 md:mb-0 ${group.dimmed ? 'text-[#3a3f5c]' : 'text-indigo-muted'}`}>
             {group.category}
           </div>
           <div class="flex flex-wrap gap-x-6 gap-y-4">
             {group.items.map((item) => (
               <div class={`flex items-center gap-2 font-mono text-[9.5px] uppercase tracking-[0.1em] transition-colors duration-300 ${
                 group.dimmed 
-                  ? 'text-[#252530]' 
-                  : (item.highlighted ? 'text-paper-mid group-hover:text-paper' : 'text-[#999999]')
+                  ? 'text-[#444450]' 
+                  : (item.highlighted ? 'text-paper-mid group-hover:text-paper' : 'text-[#bbbbbb]')
               }`}>
                 <i class={`${item.icon} text-[14px]`}></i>
                 <span>{item.name}</span>
